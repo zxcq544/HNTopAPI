@@ -11,11 +11,9 @@ namespace HNTopAPI.Models
 {
     public class Item
     {
-        [JsonIgnore]
         public int Id { get; set; }
 
         [JsonPropertyName("by")]
-        [JsonIgnore]
         public string Author { get; set; }
         public int Descendants { get; set; }
 
