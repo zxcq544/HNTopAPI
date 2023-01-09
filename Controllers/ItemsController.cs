@@ -26,9 +26,7 @@ namespace HNTopAPI.Controllers
         [Route("{page_id:int}")]
         public async Task<IActionResult> GetItemById(int page_id)
         {
-            var item = from one_item in Globals.Globals.GlobalItems
-                        where one_item.Id == page_id
-                        select one_item;
+            var item = Globals.Globals.GlobalFullStories[page_id];                       
             return new JsonResult(item);
         }
     }
