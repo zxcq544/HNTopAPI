@@ -11,7 +11,7 @@ namespace HNTopAPI.Globals
         public static Dictionary<int, Dictionary<int, Item>> GlobalFullStories;
         public static async Task GetItems()
         {
-            await GetTopStoriesFromHackerNews();            
+            await GetTopStoriesFromHackerNews();
             //GlobalFullStories = GlobalComments
         }
         public static async Task GetTopStoriesFromHackerNews()

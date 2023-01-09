@@ -52,7 +52,7 @@ namespace HNTopAPI.Globals
 */
         public async Task<Dictionary<int, Dictionary<int, Item>>> get_all_comments_for_items()
         {
-            Stopwatch stopwatch= Stopwatch.StartNew();
+            Stopwatch stopwatch = Stopwatch.StartNew();
             Console.WriteLine("starting mass comments request");
             var tasks_for_comments = sortedItems.Select(item => get_comments_for_story_by_id(item.id));
             Dictionary<int, Item>[] full_stories_temp = await Task.WhenAll(tasks_for_comments);
@@ -65,7 +65,7 @@ namespace HNTopAPI.Globals
 
         async Task<Dictionary<int, Item>> get_comments_for_story_by_id(int id)
         {
-            Stopwatch stopwatch= Stopwatch.StartNew();
+            Stopwatch stopwatch = Stopwatch.StartNew();
             Item story = sorted_items_as_dict[id];
             List<int> stack = new();
             List<Item> all_comments = new();
