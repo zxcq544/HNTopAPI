@@ -1,4 +1,5 @@
 ﻿using HNTopAPI.Models;
+using Microsoft.Extensions.Configuration.CommandLine;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -91,7 +92,46 @@ namespace HNTopAPI.Globals
                           select new { item.id, item }).ToDictionary(dic_id_item => dic_id_item.id, dic_id_item => dic_id_item.item);
             result.Add(-1, story);
             Console.WriteLine($"loaded {result.Count} comments in {stopwatch.Elapsed.TotalMilliseconds} ms");
+            count_children_for_each_comment(result);
+            Console.WriteLine(result[-1]);
             return result;
+        }
+
+        void count_children_for_each_comment(Dictionary<int, Item> comments)
+        {
+            foreach (var comment in comments)
+            {
+                Item item = comments[comment.Key];
+                if (item.kids != null)
+                {
+                    List<int> stack = new();
+                    int num_kids = 0;
+                    stack.AddRange(item.kids);
+                    num_kids = item.kids.Length;
+                    while (stack.Count > 0)
+                    {
+                        int current_id = stack[0];
+                        stack.RemoveAt(0);
+                        Item current_comment = comments[current_id];
+                        if (current_comment.kids != null)
+                        {
+                            num_kids += current_comment.kids.Length;
+                            stack.AddRange(current_comment.kids);
+                        }
+                        if (current_comment.deleted != null || current_comment.dead != null)
+                        {
+                            num_kids -= 1;
+                        }
+                    }
+                    if (num_kids > 0)
+                    {
+                        item.num_kids = num_kids;
+                        item.show_kids = true;
+                    }
+                }
+
+            }
+
         }
 
     }

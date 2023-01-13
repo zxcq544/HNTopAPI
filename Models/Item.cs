@@ -39,10 +39,17 @@ namespace HNTopAPI.Models
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public string url { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool? dead { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool? deleted { get; set; }
+        public int? num_kids { get; set; }
+        public bool? show_kids { get; set; }
+
         public override string ToString()
 
         {
-            return $"{id} {author} {score} {url}";
+            return $"descendants={descendants}  num_kids={num_kids}";
         }
     }
 
