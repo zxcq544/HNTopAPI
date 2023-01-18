@@ -93,7 +93,7 @@ namespace HNTopAPI.Globals
             result.Add(-1, story);
             Console.WriteLine($"loaded {result.Count} comments in {stopwatch.Elapsed.TotalMilliseconds} ms");
             count_children_for_each_comment(result);
-            Console.WriteLine(result[-1]);
+            //Console.WriteLine(result[-1]);
             return result;
         }
 
